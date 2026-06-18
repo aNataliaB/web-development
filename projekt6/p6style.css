@@ -1,0 +1,141 @@
+body {
+  background-color: rgb(187, 238, 255);
+}
+
+h1 {
+  font-family: 'Times New Roman', sans-serif;
+  color: RoyalBlue;
+  text-align: center;
+}
+
+form {
+  font-family: 'Georgia', sans-serif;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 25px;
+  background-color: lightblue;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  min-width: 50%;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: left;
+}
+
+form>label:not([for="k"]):not([for="m"]):not([for="w"]):not([for^="kategoria"]):not([for="nie"]):not([for="tak"]) {
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+
+input[type="checkbox"] {
+  margin-left: 20px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0 10px 0;
+  box-sizing: border-box;
+  border: 2px solid beige;
+  border-radius: 8px;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  background-color: beige;
+}
+
+select {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: beige;
+  margin: 5px 0 10px 0;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px;
+  margin: 5px 0 10px 0;
+  box-sizing: border-box;
+  border: 2px solid beige;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: none;
+}
+
+textarea:focus {
+  background-color: beige;
+}
+
+.radio-group {
+  width: 100%;
+  text-align: left;
+  margin-top: 5px;
+}
+
+.checkbox-group {
+  width: 100%;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.radio-group label,
+.checkbox-group label {
+  font-weight: normal;
+  display: inline;
+}
+
+.button-group {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+input[type="submit"] {
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+input[type="reset"] {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.back-button {
+  display: inline-block;
+  background-color: RoyalBlue;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: 'Georgia', sans-serif;
+  font-size: 16px;
+}

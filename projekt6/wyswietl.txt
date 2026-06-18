@@ -1,0 +1,128 @@
+<?php
+function escape_data($data) {
+    return htmlspecialchars($data ?? '', ENT_QUOTES, 'UTF-8');
+}
+
+$imie = escape_data($_POST['imie'] ?? '');
+$nazwisko = escape_data($_POST['nazwisko'] ?? '');
+$dataurodzenia = escape_data($_POST['dataurodzenia'] ?? '');
+$plec = escape_data($_POST['plec'] ?? '');
+$telefon = escape_data($_POST['telefon'] ?? '');
+$email = escape_data($_POST['email'] ?? '');
+$ulica = escape_data($_POST['ulica'] ?? '');
+$miasto = escape_data($_POST['miasto'] ?? ''); 
+$wojewodztwo = escape_data($_POST['wojewodztwo'] ?? '');
+$prawojazdy = escape_data($_POST['prawojazdy'] ?? '');
+$kategorie = $_POST['kategorie'] ?? [];
+$uwagi = escape_data($_POST['uwagi'] ?? ''); 
+
+$haslo_wpisane = $_POST['haslo'] ?? '';
+$dlugosc_hasla = strlen($haslo_wpisane);
+$haslo_display = str_repeat('*', $dlugosc_hasla);
+if ($dlugosc_hasla === 0) {
+    $haslo_display = 'Nie podano hasła';
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="mystyle.css">
+<title>Uzupełnione Dane</title>
+</head>
+<body>
+
+<h1>Dane uzupełnione przez użytkownika</h1>
+
+<form action="#" method="get">
+	<label for="imie">Imie:</label><br>
+	<input type="text" id="imie" name="imie" value="<?php echo $imie; ?>" readonly><br><br>
+
+	<label for="nazwisko">Nazwisko:</label><br>
+	<input type="text" id="nazwisko" name="nazwisko" value="<?php echo $nazwisko; ?>" readonly><br><br>
+
+	<label for="dataurodzenia">Data urodzenia:</label><br>
+	<input type="date" id="dataurodzenia" name="dataurodzenia" value="<?php echo $dataurodzenia; ?>" readonly><br><br>
+
+	<label for="plec">Płeć:</label><br><br>
+	<div class="radio-group"><input type="radio" id="k" name="plec" value="Kobieta" <?php if ($plec === 'Kobieta') echo 'checked'; ?> disabled>
+	<label for="k">Kobieta</label>
+	<input type="radio" id="m" name="plec" value="Mężczyzna" <?php if ($plec === 'Mężczyzna') echo 'checked'; ?> disabled>
+	<label for="m">Mężczyzna</label>
+	<input type="radio" id="w" name="plec" value="Wolę nie odpowidać" <?php if ($plec === 'Wolę nie odpowidać') echo 'checked'; ?> disabled>
+	<label for="w">Wolę nie odpowidać</label></div><br><br>
+
+	<label for="telefon">Numer telefonu:</label><br>
+	<input type="tel" id="telefon" name="telefon" value="<?php echo $telefon; ?>" readonly><br><br>
+
+	<label for="email">Email:</label><br>
+	<input type="email" id="email" name="email" value="<?php echo $email; ?>" readonly><br><br>
+
+	<label for="ulica">Ulica:</label><br>
+	<input type="text" id="ulica" name="ulica" value="<?php echo $ulica; ?>" readonly><br><br>
+
+	<label for="miasto">Miasto:</label><br>
+	<input type="text" id="miasto" name="miasto" value="<?php echo $miasto; ?>" readonly><br><br>
+
+	<label for="wojewodztwo">Województwo:</label><br><br>
+	<select id="wojewodztwo" name="wojewodztwo" disabled>
+		<?php
+		$wojewodztwa = [
+			'dolonslaskie' => 'dolnośląskie',
+			'kujawsko-pomorskie' => 'kojawsko-pomorskie',
+			'lubelskie' => 'lubelskie',
+			'lodzkie' => 'łódzkie',
+			'malopolskie' => 'małopolskie',
+			'mazowieckie' => 'mazowieckie',
+			'opolskie' => 'opolskie',
+			'podkarpackie' => 'podkarpackie',
+			'podlaskie' => 'podlaskie',
+			'pomorskie' => 'pomorskie',
+			'slaskie' => 'śląskie',
+			'swietokrzyskie' => 'świętokrzyskie',
+			'warminsko-mazurskie' => 'warmińsko-mazurskie',
+			'wielkopolskie' => 'wielkopolskie',
+			'zachodniopomorskie' => 'zachodniopomorskie'
+		];
+		
+		foreach ($wojewodztwa as $value => $label) {
+			$selected = ($wojewodztwo === $value) ? 'selected' : '';
+			echo "<option value=\"$value\" $selected>$label</option>";
+		}
+		?>
+	</select><br><br>
+	
+	<label for="prawojazdy">Czy posiadasz prawo jazdy?:</label><br>
+	<div class="radio-group"><input type="radio" id="nie" name="prawojazdy" value="Nie" <?php if ($prawojazdy === 'Nie') echo 'checked'; ?> disabled>
+  	<label for="nie">Nie</label><br>
+	<input type="radio" id="tak" name="prawojazdy" value="Tak" <?php if ($prawojazdy === 'Tak') echo 'checked'; ?> disabled>
+  	<label for="tak">Tak, kategorii:</label></div>
+	
+  <div class="checkbox-group">
+	<?php
+	$kategorie_list = ['A1', 'A2', 'B1', 'B', 'B+E', 'C1', 'C+E', 'D1', 'D', 'D+E', 'T'];
+	foreach ($kategorie_list as $kat) {
+		$checked = in_array($kat, $kategorie) ? 'checked' : '';
+		echo "<input type=\"checkbox\" id=\"kategoria$kat\" name=\"kategorie[]\" value=\"$kat\" $checked disabled>";
+  	echo "<label for=\"kategoria$kat\"> $kat</label>";
+		if ($kat === 'C1') {
+			echo "<br>";
+		}
+	}
+	?></div><br>
+ 	
+	<label for="uwagi">Uwagi:</label><br>
+	<small>Maksymalna liczba znaków:100!</small><br>
+	<textarea name="uwagi" rows="10" cols="30" maxlength="100" readonly><?php echo $uwagi; ?></textarea><br><br>
+
+	<label for="haslo">Hasło:</label><br>
+	<input type="text" id="haslo" name="haslo" value="<?php echo $haslo_display; ?>" readonly><br><br> <div class="button-group">
+    <a href="index.php" class="back-button">Wróć do formularza</a>
+</div>
+</form> 
+
+
+</body>
+</html>
