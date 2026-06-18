@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="p4style.css">
+	<title>Kalkulator</title>
+
+</head>
+
+<body>
+	<div class="calculator-container">
+		<h1>Kalkulator</h1><br><br>
+
+		<div class="calculator">
+			<input type="text" id="calculator-screen" class="calculator-screen" value="0" disabled>
+			<div id="calculator-buttons" class="calculator-buttons">
+				<button class="button">7</button>
+				<button class="button">8</button>
+				<button class="button">9</button>
+				<button class="button operator" data-action="/">&divide;</button>
+
+				<button class="button">4</button>
+				<button class="button">5</button>
+				<button class="button">6</button>
+				<button class="button operator" data-action="*">&times;</button>
+
+				<button class="button">1</button>
+				<button class="button">2</button>
+				<button class="button">3</button>
+				<button class="button operator" data-action="-">-</button>
+
+				<button class="button">0</button>
+				<button class="button decimal" data-action=".">.</button>
+				<button class="button add" data-action="+">+</button>
+
+				<button class="button clear" data-action="clear">C</button>
+				<button class="button equal" data-action="=">=</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const screen = document.getElementById("calculator-screen");
+			const buttonsContainer = document.getElementById("calculator-buttons");
+			const buttons = buttonsContainer.getElementsByClassName("button");
+
+			let expr = ""; // aktualne wyrażenie
+			const isOperator = ch => ["+", "-", "*", "/"].includes(ch);
+			const lastChar = () => expr.charAt(expr.length - 1);
+			const secondLastChar = () => expr.charAt(expr.length - 2);
+
+			function prettyExpr(str) {
+				return str.replace(/\*/g, "×").replace(/\//g, "÷");
+			}
+
+			function updateScreen() {
+				screen.value = expr === "" ? "0" : prettyExpr(expr);
+			}
+
+			function appendDigit(digit) {
+				expr += digit;
+				updateScreen();
+			}
+
+			function handleDot() {
+				let part = expr.split(/[\+\-\*\/]/).pop();
+				if (part.includes(".")) return; // już jest kropka
+				if (part === "") expr += "0.";
+				else expr += ".";
+				updateScreen();
+			}
+
+			function handleOperator(op) {
+				if (expr === "" && op === "-") {
+					expr = "-"; // pozwól na liczbę ujemną na początku
+					updateScreen();
+					return;
+				}
+				if (expr === "") return;
+				const last = lastChar();
+				if (isOperator(last)) {
+					if (op === "-" && last !== "-") {
+						expr += "-";
+					} // pozwól na minus po operatorze (np. 5 * -3)
+					else if (last === "-" && expr.length >= 2 && isOperator(secondLastChar())) {
+						expr = expr.slice(0, -2) + op;
+					} // np. "+-" -> "*"
+					else {
+						expr = expr.slice(0, -1) + op;
+					}
+				}
+				else {
+					expr += op;
+				}
+				updateScreen();
+			}
+
+			function clearAll() {
+				expr = "";
+				updateScreen();
+			}
+
+			function evaluateExpression() {
+				try {
+					let toEval = expr;
+					while (toEval.length && isOperator(toEval.charAt(toEval.length - 1))) {
+						toEval = toEval.slice(0, -1);
+					} // usuń końcowy operator
+					if (toEval.trim() === "") return;
+
+					const result = Function('"use strict"; return (' + toEval + ')')();
+					if (!isFinite(result)) throw new Error("Błąd");
+					expr = String(parseFloat(result.toFixed(10)));
+					updateScreen();
+				}
+				catch (e) {
+					screen.value = "Error";
+					setTimeout(() => {
+						expr = "";
+						updateScreen();
+					}, 1000);
+				}
+			}
+
+			// Obsługa kliknięć przycisków
+			Array.from(buttons).forEach(btn => {
+				btn.addEventListener("click", () => {
+					const action = btn.dataset.action;
+					const val = btn.textContent;
+
+					if (!action) {
+						appendDigit(val);
+					}
+					else if (action === ".") {
+						handleDot();
+					}
+					else if (["+", "-", "*", "/"].includes(action)) {
+						handleOperator(action);
+					}
+					else if (action === "clear") {
+						clearAll();
+					}
+					else if (action === "=") {
+						evaluateExpression();
+					}
+				});
+			});
+			updateScreen();
+		});
+
+	</script>
+</body>
+
+</html>
