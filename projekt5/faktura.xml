@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Faktura
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="faktura.xsd">
+    
+    <NumerFaktury>FV/2025/11/001</NumerFaktury>
+    <Miejscowosc>Warszawa</Miejscowosc>
+    
+    
+    <ListaUslug>
+        <Usluga>
+            <Nazwa>Konsultacja IT</Nazwa>
+            <CenaNettoJednostkowa>100.00</CenaNettoJednostkowa>
+            <Ilosc>3</Ilosc>
+            <SumaNetto>300.00</SumaNetto>
+        </Usluga>
+        <Usluga>
+            <Nazwa>Zakup Licencji</Nazwa>
+            <CenaNettoJednostkowa>50.00</CenaNettoJednostkowa>
+            <Ilosc>1</Ilosc>
+            <SumaNetto>50.00</SumaNetto>
+        </Usluga>
+         
+    </ListaUslug>
+    
+    <Sprzedawca>
+        <Nazwa>Tech Solutions Sp. z o.o.</Nazwa>
+        <Adres>Ul. Główna 1, 00-001 Warszawa</Adres>
+        <NIP>PL1234567890</NIP>
+    </Sprzedawca>
+    <Kupujacy>Jan Kowalski</Kupujacy>
+    <ZdjecieFaktury>vat.png</ZdjecieFaktury>
+</Faktura>

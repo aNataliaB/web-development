@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    
+    </xs:simpleType>
+    
+    <xs:complexType name="UslugaTyp">
+        <xs:sequence>
+            <xs:element name="Nazwa" type="xs:string"/>
+            <xs:element name="CenaNettoJednostkowa" type="xs:decimal"/>
+            <xs:element name="Ilosc" type="xs:integer"/>
+            <xs:element name="SumaNetto" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="Faktura">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="NumerFaktury" type="xs:string"/>
+                <xs:element name="Miejscowosc" type="xs:string"/>
+                
+                <xs:element name="Kwota" type="xs:decimal"/>
+                
+                <xs:element name="ListaUslug">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Usluga" type="UslugaTyp" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="Sprzedawca">
+                    <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="Nazwa" type="xs:string"/>
+                           <xs:element name="Adres" type="xs:string"/>
+                           <xs:element name="NIP" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Kupujacy" type="xs:string" minOccurs="0"/>
+                <xs:element name="ZdjecieFaktury" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
