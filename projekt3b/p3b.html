@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="p3bstyle.css">
+  <title>Strona galerii zdjęć</title>
+  <style>
+    div.gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    div.gallery-item {
+      margin: 5px;
+      border: 1px solid #ccc;
+      width: 300px;
+    }
+
+    div.gallery-item:hover {
+      border: 3px solid #777;
+    }
+
+    div.gallery-item img {
+      width: 100%;
+      height: auto;
+    }
+
+    div.gallery-item div.desc {
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Galeria obrazków</h1>
+
+  <div class="gallery">
+
+    <div class="gallery-item">
+      <a target="_blank" href="zyrafy.jpg">
+        <img src="zyrafy.jpg" alt="Żyrafy" width="600">
+      </a>
+      <div class="desc">Obrazek 1: Żyrafy.</div>
+    </div>
+
+    <div class="gallery-item">
+      <a target="_blank" href="kwiaty.jpg">
+        <img src="kwiaty.jpg" alt="Kwiaty" width="600">
+      </a>
+      <div class="desc">Obrazek 2: Kwiaty przy zachodzie słońca.</div>
+    </div>
+
+    <div class="gallery-item">
+      <a target="_blank" href="lis.jpg">
+        <img src="lis.jpg" alt="Lis" width="600">
+      </a>
+      <div class="desc">Obrazek 3: Lis.</div>
+    </div>
+
+    <div class="gallery-item">
+      <a target="_blank" href="jesien.jpg">
+        <img src="jesien.jpg" alt="Jesień" width="600">
+      </a>
+      <div class="desc">Obrazek 4: Jesień.</div>
+    </div>
+
+    <div class="gallery-item">
+      <a target="_blank" href="zolw.jpg">
+        <img src="zolw.jpg" alt="Żółw" width="600">
+      </a>
+      <div class="desc">Obrazek 5: Żółw.</div>
+    </div>
+
+    <div class="gallery-item">
+      <a target="_blank" href="colors.jpg">
+        <img src="colors.jpg" alt="Kolory" width="600">
+      </a>
+      <div class="desc">Obrazek 6: Kolory na twarzy.</div>
+    </div>
+
+    <div class="gallery-item">
+      <a target="_blank" href="gory.jpg">
+        <img src="gory.jpg" alt="Góry" width="600">
+      </a>
+      <div class="desc">Obrazek 7: Góry.</div>
+    </div>
+
+    <div class="gallery-item">
+      <a target="_blank" href="zyrafy.jpg">
+        <img src="zyrafy.jpg" alt="Żyrafy" width="600">
+      </a>
+      <div class="desc">Obrazek 8: Żyrafy.</div>
+    </div>
+
+
+  </div>
+
+
+
+</body>
+
+</html>
